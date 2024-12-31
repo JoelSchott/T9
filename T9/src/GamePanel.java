@@ -294,7 +294,7 @@ public class GamePanel extends JPanel {
 
         public void mouseClicked(MouseEvent e) {
             // no need to do anything if the game is over
-            if (game.getBoard().hasWinner() || !game.getBoard().hasEmpty()){
+            if (game.isDone()){
                 return;
             }
             // constants

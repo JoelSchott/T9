@@ -24,18 +24,20 @@ public class Main {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        while (!game.getBoard().hasWinner() && game.getBoard().hasEmpty()){
-            messagePanel.setMessage("<html><font color='" + game.getCurrentPlayer().getColorName() + "'>Player " + (game.getTurn() + 1) + "</font>, select a ring</html>");
-            frame.repaint();
-            // wait for player ring selection
-            while (game.getCurrentPlayer().getSelection() == Selection.NONE){
-                sleep();
-            }
-            messagePanel.setMessage("<html><font color='" + game.getCurrentPlayer().getColorName() + "'>Player " + (game.getTurn() + 1) + "</font>, place the ring or select a new ring</html>");
-            frame.repaint();
-            // wait for the player to place the ring
-            while (game.getCurrentPlayer().getSelection() != Selection.NONE){
-                sleep();
+        while (!game.isDone()){
+            if (game.currentPlayerCanPlay()) {
+                messagePanel.setMessage("<html><font color='" + game.getCurrentPlayer().getColorName() + "'>Player " + (game.getTurn() + 1) + "</font>, select a ring</html>");
+                frame.repaint();
+                // wait for player ring selection
+                while (game.getCurrentPlayer().getSelection() == Selection.NONE) {
+                    sleep();
+                }
+                messagePanel.setMessage("<html><font color='" + game.getCurrentPlayer().getColorName() + "'>Player " + (game.getTurn() + 1) + "</font>, place the ring or select a new ring</html>");
+                frame.repaint();
+                // wait for the player to place the ring
+                while (game.getCurrentPlayer().getSelection() != Selection.NONE) {
+                    sleep();
+                }
             }
             game.nextTurn();
         }
