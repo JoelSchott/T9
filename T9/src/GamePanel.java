@@ -293,8 +293,8 @@ public class GamePanel extends JPanel {
     private class GameMouseListener implements MouseListener{
 
         public void mouseClicked(MouseEvent e) {
-            // no need to do anything if the game has a winner already
-            if (game.getBoard().hasWinner()){
+            // no need to do anything if the game is over
+            if (game.getBoard().hasWinner() || !game.getBoard().hasEmpty()){
                 return;
             }
             // constants
